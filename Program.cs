@@ -14,6 +14,7 @@ namespace Promedio1
             bool a = true;
             while (a)
             {
+                Jugador player;
                 // Crear personaje, asignar stats (x<=100)
                 Console.WriteLine("Ingresar vida del jugador");
                 int php = int.Parse(Console.ReadLine());
@@ -27,7 +28,7 @@ namespace Promedio1
                 }
                 else
                 {
-                    Jugador p = new Jugador(php, pdmg);
+                    player = new Jugador(php, pdmg, true);
                     Console.WriteLine("El jugador se ha creado con éxito.\n--------------------------");
                 }
 
@@ -57,13 +58,58 @@ namespace Promedio1
                         Console.WriteLine("El enemigo se ha creado con éxito.\n--------------------------");
                     }
                 }
-                
 
+                bool game = true;
+                while (game)
+                {
+                    
+                    // Jugador ataca
+                    Console.WriteLine($"HP: {player.GetHP()}");
+                    Console.WriteLine("Elija al enemigo para atacar");
+                    for (int i = 0; i < ecount; i++)
+                    {
+                        Console.WriteLine($"({i}) Enemigo {i} - {enemigos[i].GetHP()} HP");
+                    }
+                    int index = int.Parse(Console.ReadLine());
+
+                    // Si el enemigo está muerto, el jugador no podrá atacarlo
+                    if (enemigos[index].Alive() == false)
+                    {
+                        Console.WriteLine("El enemigo está muerto y no se puede atacar\n--------------------------");
+                    }
+                    else
+                    {
+                        enemigos[index].GetDamage(player);
+                    }
+                    // Si se acaban los enemigos, mensaje de victoria
+                    int evivos = enemigos.FindAll(x => x.Alive()).Count;
+                    if (evivos == 0)
+                    {
+                        Console.WriteLine("----VICTORIA----");
+                        game = false;
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        // Enemigo random ataca de vuelta
+                        Random random = new Random();
+                        int r = random.Next(enemigos.Count);
+                        if (enemigos[r].Alive())
+                        {
+                            player.GetDamage(enemigos[r]);
+                        }
+                        // Si el jugador queda sin vida, mensaje de derrota
+                        if (player.Alive() == false)
+                        {
+                            Console.WriteLine("----GAME OVER----");
+                            game = false;
+                            Console.ReadLine();
+                        }
+                    }
+                }
                 
-                // Jugador ataca, enemigo random ataca de vuelta
-                // Si el enemigo está muerto, el jugador no podrá atacarlo (enemigos.Remove())
-                // Si el jugador queda sin vida, mensaje de derrota
-                // Si se acaban los enemigos, mensaje de victoria
+                
+                
                 //Reiniciar la partida
                 Console.WriteLine("¿Desea reiniciar la partida?\n(1) SÍ\n(2) NO");
                 string b = Console.ReadLine();

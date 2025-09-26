@@ -19,19 +19,18 @@ namespace Promedio1
             this.alive = c;
         }
 
-        public Enemigo()
-        {
-
-        }
-
         public int Damage()
         {
             return dmg;
         }
 
-        public void GetDamage()
+        public void GetDamage(Jugador p)
         {
-
+            hp -= p.Damage();
+            if(hp < 0)
+            {
+                hp = 0;
+            }
         }
 
         public bool Alive()
@@ -41,6 +40,11 @@ namespace Promedio1
                 alive = false;
             }
             return alive;
+        }
+
+        public int GetHP()
+        {
+            return hp;
         }
     }
 }
