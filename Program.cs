@@ -60,7 +60,7 @@ namespace Promedio1
                 }
 
                 bool game = true;
-                while (game)
+                while (game && ecount > 0)
                 {
                     
                     // Jugador ataca
@@ -75,10 +75,11 @@ namespace Promedio1
                     // Si el enemigo está muerto, el jugador no podrá atacarlo
                     if (enemigos[index].Alive() == false)
                     {
-                        Console.WriteLine("El enemigo está muerto y no se puede atacar\n--------------------------");
+                        Console.WriteLine("El enemigo está muerto y no se puede atacar");
                     }
                     else
                     {
+                        Console.WriteLine($"Atacaste al enemigo {index} ({player.Damage()}puntos)");
                         enemigos[index].GetDamage(player);
                     }
                     // Si se acaban los enemigos, mensaje de victoria
@@ -91,24 +92,24 @@ namespace Promedio1
                     }
                     else
                     {
-                        // Enemigo random ataca de vuelta
                         Random random = new Random();
                         int r = random.Next(enemigos.Count);
-                        if (enemigos[r].Alive())
+                        // Enemigo random ataca de vuelta
+                        while (!enemigos[r].Alive())
                         {
-                            player.GetDamage(enemigos[r]);
+                            r = random.Next(enemigos.Count);
                         }
+                        Console.WriteLine($"El enemigo {r} atacó ({enemigos[r].Damage()} puntos)\n--------------------------");
+                        player.GetDamage(enemigos[r]);
                         // Si el jugador queda sin vida, mensaje de derrota
                         if (player.Alive() == false)
                         {
-                            Console.WriteLine("----GAME OVER----");
+                            Console.WriteLine("No le queda HP al jugador\n----GAME OVER----");
                             game = false;
                             Console.ReadLine();
                         }
                     }
                 }
-                
-                
                 
                 //Reiniciar la partida
                 Console.WriteLine("¿Desea reiniciar la partida?\n(1) SÍ\n(2) NO");
