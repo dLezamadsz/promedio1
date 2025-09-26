@@ -1,0 +1,7 @@
+C:\Users\TIP\source\repos\Promedio1\bin\Debug\Promedio1.exe.config
+C:\Users\TIP\source\repos\Promedio1\bin\Debug\Promedio1.exe
+C:\Users\TIP\source\repos\Promedio1\bin\Debug\Promedio1.pdb
+C:\Users\TIP\source\repos\Promedio1\obj\Debug\Promedio1.csproj.AssemblyReference.cache
+C:\Users\TIP\source\repos\Promedio1\obj\Debug\Promedio1.csproj.CoreCompileInputs.cache
+C:\Users\TIP\source\repos\Promedio1\obj\Debug\Promedio1.exe
+C:\Users\TIP\source\repos\Promedio1\obj\Debug\Promedio1.pdb

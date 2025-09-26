@@ -10,11 +10,13 @@ namespace Promedio1
     {
         private int hp;
         private int dmg;
+        private bool alive;
 
-        public Enemigo(int a, int b)
+        public Enemigo(int a, int b, bool c)
         {
             this.hp = a;
             this.dmg = b;
+            this.alive = c;
         }
 
         public Enemigo()
@@ -34,7 +36,6 @@ namespace Promedio1
 
         public bool Alive()
         {
-            bool alive = true;
             if (hp <= 0)
             {
                 alive = false;
